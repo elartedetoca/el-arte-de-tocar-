@@ -1,0 +1,48 @@
+<!DO<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Arte de Tocar | Masoterapia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root { --teal: #2d7a78; --rose: #e6b0aa; --marble: #f4f4f4; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--marble); background-image: url('https://www.transparenttextures.com/patterns/marble-white.png'); }
+        .brand { font-family: 'Montserrat', sans-serif; color: var(--teal); }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .active-sys { background: white !important; color: var(--teal) !important; border-left: 4px solid #4fd1c5 !important; }
+    </style>
+</head>
+<body class="text-slate-800">
+    <nav class="fixed w-full z-[100] glass px-6 py-4 flex justify-between items-center shadow-sm">
+        <div class="brand">
+            <h1 class="font-bold text-lg tracking-widest uppercase">El Arte de Tocar</h1>
+        </div>
+        <button onclick="alert('Próximamente: Test de Bienestar')" class="bg-rose-100 text-teal-900 px-4 py-2 rounded-full text-[10px] font-bold shadow-sm">TEST DE BIENESTAR</button>
+    </nav>
+
+    <section class="pt-32 pb-20 px-4 max-w-6xl mx-auto">
+        <div class="glass rounded-[2rem] shadow-2xl flex flex-col lg:flex-row overflow-hidden">
+            <aside class="w-full lg:w-64 bg-white/30 p-6 flex flex-col gap-2">
+                <button onclick="change('muscular', this)" class="sys-btn active-sys p-4 rounded-xl text-xs font-bold text-left transition-all">SISTEMA MUSCULAR</button>
+                <button onclick="change('nervioso', this)" class="sys-btn p-4 rounded-xl text-xs text-slate-500 font-bold text-left transition-all">SISTEMA NERVIOSO</button>
+                <button onclick="change('circulatorio', this)" class="sys-btn p-4 rounded-xl text-xs text-slate-500 font-bold text-left transition-all">SISTEMA CIRCULATORIO</button>
+                <button onclick="change('linfatico', this)" class="sys-btn p-4 rounded-xl text-xs text-slate-500 font-bold text-left transition-all">SISTEMA LINFÁTICO</button>
+                <button onclick="change('cadenas', this)" class="sys-btn p-4 rounded-xl text-xs text-slate-500 font-bold text-left transition-all">CADENAS MUSCULARES</button>
+            </aside>
+            <div class="flex-1 relative flex items-center justify-center p-8 bg-white/10 min-h-[500px]">
+                <img id="anatomy-img" src="activos/mapa/muscular.png" class="max-h-[550px] drop-shadow-2xl transition-opacity duration-300">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function change(sys, btn) {
+            document.querySelectorAll('.sys-btn').forEach(b => b.classList.remove('active-sys'));
+            btn.classList.add('active-sys');
+            document.getElementById('anatomy-img').src = `activos/mapa/${sys}.png`;
+        }
+    </script>
+</body>
+</html>
