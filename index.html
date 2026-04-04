@@ -4,91 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Arte de Tocar | Plataforma Holística</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            /* Efecto mármol sutil */
-            background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png'), 
-                              linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            background: #ffffff;
+            background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png');
+        }
+        .gold-gradient { background: linear-gradient(135deg, #b76e79 0%, #dfa0a9 100%); }
+        .marble-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(183, 110, 121, 0.2);
+            box-shadow: 0 15px 35px rgba(183, 110, 121, 0.1);
         }
         .rose-gold-text { color: #b76e79; }
-        .rose-gold-border { border-color: #b76e79; }
-        .rose-gold-bg { background-color: #b76e79; }
-        .marble-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(183, 110, 121, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-        }
+        .muscle-btn { transition: all 0.3s ease; }
     </style>
 </head>
-<body>
+<body class="min-h-screen pb-24">
     <div id="root"></div>
 
     <script type="text/babel">
         const { useState } = React;
 
-        const AnatomicalApp = () => {
-            const [selectedPart, setSelectedPart] = useState(null);
+        const App = () => {
+            const [selected, setSelected] = useState(null);
 
-            const muscles = [
-                { id: 'trapecio', name: 'Trapecio', info: 'Zona común de tensión por estrés. La masoterapia ayuda a liberar puntos gatillo.' },
-                { id: 'pectorales', name: 'Pectorales', info: 'Importantes para la postura. Su estiramiento mejora la capacidad respiratoria.' },
-                { id: 'cuadriceps', name: 'Cuádriceps', info: 'Motor principal de la marcha. Vital para la estabilidad de la rodilla.' }
-            ];
+            const muscleData = {
+                trapecio: { name: 'Trapecio', info: 'Libera tensión cervical y estrés acumulado.', icon: '🧘' },
+                lumbares: { name: 'Zona Lumbar', info: 'Estabilización y alivio de cargas profundas.', icon: '🛡️' },
+                piernas: { name: 'Cuádriceps', info: 'Mejora la circulación y recuperación muscular.', icon: '🚶' }
+            };
 
             return (
-                <div className="min-h-screen p-4 flex flex-col items-center">
-                    <header className="text-center mb-8">
-                        <h1 className="text-3xl font-light rose-gold-text tracking-widest uppercase">El Arte de Tocar</h1>
-                        <p className="text-gray-500 italic">Masoterapia & Bienestar Holístico</p>
+                <div className="p-4 max-w-md mx-auto">
+                    <header className="text-center py-8">
+                        <h1 className="text-3xl font-light tracking-[0.3em] uppercase rose-gold-text">El Arte de Tocar</h1>
+                        <div className="h-px w-16 gold-gradient mx-auto my-4"></div>
+                        <p className="text-gray-400 italic text-xs uppercase tracking-widest">Plataforma Clínica-Holística</p>
                     </header>
 
-                    <div className="marble-card rounded-3xl p-6 w-full max-w-md text-center">
-                        <h2 className="text-xl mb-4 text-gray-700">Explora tu Anatomía</h2>
+                    <section className="marble-card rounded-[2.5rem] p-6 mb-8 border-t-8 border-[#b76e79]">
+                        <h2 className="text-xl text-center text-gray-700 font-medium mb-1">Mapa Corporal</h2>
+                        <p className="text-center text-gray-400 text-xs mb-6 italic text-sm">Toca la zona de interés</p>
                         
-                        {/* Simulación de Mapa Corporal */}
-                        <div className="relative h-80 bg-gray-100 rounded-2xl mb-6 flex items-center justify-center border-2 border-dashed rose-gold-border">
-                            <div className="space-y-2">
-                                {muscles.map(m => (
-                                    <button 
-                                        key={m.id}
-                                        onClick={() => setSelectedPart(m)}
-                                        className={`block w-40 py-2 rounded-full transition-all ${selectedPart?.id === m.id ? 'rose-gold-bg text-white scale-105' : 'bg-white rose-gold-text border rose-gold-border'}`}
-                                    >
-                                        {m.name}
-                                    </button>
-                                ))}
-                            </div>
+                        <div className="flex flex-col gap-3">
+                            {Object.keys(muscleData).map((id) => (
+                                <button 
+                                    key={id}
+                                    onClick={() => setSelected(muscleData[id])}
+                                    className={`muscle-btn py-4 px-6 rounded-2xl border text-left flex justify-between items-center ${selected?.name === muscleData[id].name ? 'gold-gradient text-white shadow-lg scale-105' : 'bg-white text-gray-600 border-gray-100'}`}
+                                >
+                                    <span className="font-medium uppercase tracking-widest text-xs">{muscleData[id].name}</span>
+                                    <span>{selected?.name === muscleData[id].name ? '✨' : '⚪'}</span>
+                                </button>
+                            ))}
                         </div>
 
-                        {selectedPart ? (
-                            <div className="animate-fade-in">
-                                <h3 className="font-bold rose-gold-text text-lg">{selectedPart.name}</h3>
-                                <p className="text-gray-600 text-sm mt-2">{selectedPart.info}</p>
+                        {selected && (
+                            <div className="mt-8 p-4 bg-rose-50/50 rounded-2xl border border-rose-100 animate-pulse-once">
+                                <div className="flex items-center gap-3 mb-2">
+                                    <span className="text-2xl">{selected.icon}</span>
+                                    <h3 className="font-bold rose-gold-text uppercase text-sm tracking-tighter">{selected.name}</h3>
+                                </div>
+                                <p className="text-gray-600 text-sm italic">{selected.info}</p>
                             </div>
-                        ) : (
-                            <p className="text-gray-400 italic">Toca un músculo para aprender más</p>
                         )}
-                    </div>
+                    </section>
 
-                    <footer className="mt-auto pt-8 text-xs text-gray-400">
-                        &copy; 2026 El Arte de Tocar | Estética Mármol & Oro Rosa
+                    <section className="space-y-4">
+                        <h3 className="rose-gold-text text-[10px] font-bold uppercase tracking-[0.2em] px-4">Sistemas Educativos</h3>
+                        <div className="grid grid-cols-2 gap-3">
+                            {['Linfático', 'Nervioso', 'Miofascial', 'Circulatorio'].map(sys => (
+                                <div key={sys} className="marble-card p-4 rounded-2xl text-center">
+                                    <div className="w-8 h-8 gold-gradient rounded-full mx-auto mb-2 opacity-50"></div>
+                                    <span className="text-[10px] text-gray-500 font-medium uppercase tracking-tighter">{sys}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    <footer className="fixed bottom-6 left-0 w-full px-6">
+                        <button className="w-full gold-gradient text-white py-4 rounded-full font-bold shadow-xl shadow-rose-200 uppercase tracking-[0.2em] text-[10px]">
+                            Agendar Consulta Educativa
+                        </button>
                     </footer>
                 </div>
             );
         };
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<AnatomicalApp />);
+        root.render(<App />);
     </script>
 </body>
 </html>
 
+                 
       
