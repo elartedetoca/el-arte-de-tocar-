@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -75,34 +75,5 @@
                                 <p className="text-gray-600 text-sm italic">{selected.info}</p>
                             </div>
                         )}
-                    </section>
+                    </section
 
-                    <section className="space-y-4">
-                        <h3 className="rose-gold-text text-[10px] font-bold uppercase tracking-[0.2em] px-4">Sistemas Educativos</h3>
-                        <div className="grid grid-cols-2 gap-3">
-                            {['Linfático', 'Nervioso', 'Miofascial', 'Circulatorio'].map(sys => (
-                                <div key={sys} className="marble-card p-4 rounded-2xl text-center">
-                                    <div className="w-8 h-8 gold-gradient rounded-full mx-auto mb-2 opacity-50"></div>
-                                    <span className="text-[10px] text-gray-500 font-medium uppercase tracking-tighter">{sys}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-
-                    <footer className="fixed bottom-6 left-0 w-full px-6">
-                        <button className="w-full gold-gradient text-white py-4 rounded-full font-bold shadow-xl shadow-rose-200 uppercase tracking-[0.2em] text-[10px]">
-                            Agendar Consulta Educativa
-                        </button>
-                    </footer>
-                </div>
-            );
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
-</html>
-
-                 
-      
