@@ -3,259 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Arte de Tocar | Plataforma Clínica-Holística</title>
-    
+    <title>El Arte de Tocar | Plataforma Holística</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
     <style>
-        :root { --soft-bg: #f5f1ed; --teal-brand: #2d7a78; --accent: #2563eb; }
-        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #f5f1ed 0%, #e0f2f1 100%); scroll-behavior: smooth; }
-        .brand-font { font-family: 'Montserrat', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.4); }
-        .system-btn.active { background-color: var(--teal-brand); color: white; transform: scale(1.05); }
-        .hotspot { transition: all 0.3s ease; }
-        .hotspot:hover { transform: scale(1.3); }
-        .test-step { display: none; }
-        .test-step.active { display: block; animation: slideUp 0.4s ease-out; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        /* Ocultar scrollbar pero mantener funcionalidad */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            /* Efecto mármol sutil */
+            background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png'), 
+                              linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+        }
+        .rose-gold-text { color: #b76e79; }
+        .rose-gold-border { border-color: #b76e79; }
+        .rose-gold-bg { background-color: #b76e79; }
+        .marble-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(183, 110, 121, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased">
+<body>
+    <div id="root"></div>
 
-    <nav class="fixed w-full z-[100] glass px-6 py-4 flex justify-between items-center shadow-sm">
-        <div class="brand-font">
-            <h1 class="font-bold text-lg tracking-[0.2em] uppercase leading-none">El Arte de Tocar</h1>
-            <p class="text-[9px] text-teal-700 font-medium tracking-[0.3em] uppercase mt-1">Masoterapia & Educación</p>
-        </div>
-        <div class="hidden lg:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-            <a href="#mapa" class="hover:text-teal-600 transition">Explorador</a>
-            <a href="#test" class="hover:text-teal-600 transition">Test de Alivio</a>
-            <a href="#biblioteca" class="hover:text-teal-600 transition">Biblioteca</a>
-        </div>
-        <a href="TU_LINK_CALENDLY" class="bg-blue-600 text-white px-6 py-2.5 rounded-full text-[10px] font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition">RESERVAR CITA</a>
-    </nav>
+    <script type="text/babel">
+        const { useState } = React;
 
-    <main>
-        <section id="mapa" class="pt-32 pb-20 px-4 max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-light italic text-slate-700 brand-font">Explorador de Sistemas</h2>
-                <p class="text-[11px] text-teal-600 font-bold uppercase tracking-[0.3em] mt-3">Análisis profundo de la patología y bienestar</p>
-            </div>
+        const AnatomicalApp = () => {
+            const [selectedPart, setSelectedPart] = useState(null);
 
-            <div class="glass rounded-[3.5rem] shadow-2xl flex flex-col lg:flex-row overflow-hidden border border-white/50 min-h-[700px]">
-                <aside class="w-full lg:w-80 bg-slate-900 p-8 flex flex-col gap-3 justify-center">
-                    <h3 class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-4">Selecciona Sistema:</h3>
-                    <button onclick="switchSystem('muscular')" class="system-btn active p-4 rounded-2xl text-left text-xs font-bold transition flex items-center gap-3">
-                        <span class="w-2 h-2 bg-red-500 rounded-full"></span> SISTEMA MUSCULAR
-                    </button>
-                    <button onclick="switchSystem('nervioso')" class="system-btn p-4 rounded-2xl text-slate-400 hover:bg-slate-800 text-left text-xs font-bold transition flex items-center gap-3">
-                        <span class="w-2 h-2 bg-yellow-400 rounded-full"></span> SISTEMA NERVIOSO
-                    </button>
-                    <button onclick="switchSystem('circulatorio')" class="system-btn p-4 rounded-2xl text-slate-400 hover:bg-slate-800 text-left text-xs font-bold transition flex items-center gap-3">
-                        <span class="w-2 h-2 bg-blue-400 rounded-full"></span> CIRCULATORIO
-                    </button>
-                    <button onclick="switchSystem('linfatico')" class="system-btn p-4 rounded-2xl text-slate-400 hover:bg-slate-800 text-left text-xs font-bold transition flex items-center gap-3">
-                        <span class="w-2 h-2 bg-green-400 rounded-full"></span> LINFÁTICO
-                    </button>
-                    <button onclick="switchSystem('cadenas')" class="system-btn p-4 rounded-2xl text-slate-400 hover:bg-slate-800 text-left text-xs font-bold transition flex items-center gap-3">
-                        <span class="w-2 h-2 bg-purple-500 rounded-full"></span> CADENAS MIOFASCIALES
-                    </button>
-                </aside>
+            const muscles = [
+                { id: 'trapecio', name: 'Trapecio', info: 'Zona común de tensión por estrés. La masoterapia ayuda a liberar puntos gatillo.' },
+                { id: 'pectorales', name: 'Pectorales', info: 'Importantes para la postura. Su estiramiento mejora la capacidad respiratoria.' },
+                { id: 'cuadriceps', name: 'Cuádriceps', info: 'Motor principal de la marcha. Vital para la estabilidad de la rodilla.' }
+            ];
 
-                <div class="flex-1 relative bg-[#e8eef2] flex items-center justify-center p-6 lg:p-12">
-                    <div class="relative w-full h-full flex items-center justify-center">
-                        <img id="anatomy-render" src="https://via.placeholder.com/600x800?text=Cuerpo+Base" class="max-h-[600px] w-auto drop-shadow-2xl transition-all duration-700 opacity-90">
+            return (
+                <div className="min-h-screen p-4 flex flex-col items-center">
+                    <header className="text-center mb-8">
+                        <h1 className="text-3xl font-light rose-gold-text tracking-widest uppercase">El Arte de Tocar</h1>
+                        <p className="text-gray-500 italic">Masoterapia & Bienestar Holístico</p>
+                    </header>
+
+                    <div className="marble-card rounded-3xl p-6 w-full max-w-md text-center">
+                        <h2 className="text-xl mb-4 text-gray-700">Explora tu Anatomía</h2>
                         
-                        <div id="hotspots-layer" class="absolute inset-0">
-                            <button onclick="openAtlas('cervical')" class="hotspot absolute top-[15%] left-[48%] group">
-                                <div class="w-10 h-10 bg-red-500/20 rounded-full animate-ping absolute -inset-3"></div>
-                                <div class="w-4 h-4 bg-red-600 rounded-full border-2 border-white shadow-xl relative z-10"></div>
-                            </button>
-                            <button onclick="openAtlas('lumbar')" class="hotspot absolute top-[55%] left-[48%] group">
-                                <div class="w-10 h-10 bg-red-500/20 rounded-full animate-ping absolute -inset-3"></div>
-                                <div class="w-4 h-4 bg-red-600 rounded-full border-2 border-white shadow-xl relative z-10"></div>
-                            </button>
+                        {/* Simulación de Mapa Corporal */}
+                        <div className="relative h-80 bg-gray-100 rounded-2xl mb-6 flex items-center justify-center border-2 border-dashed rose-gold-border">
+                            <div className="space-y-2">
+                                {muscles.map(m => (
+                                    <button 
+                                        key={m.id}
+                                        onClick={() => setSelectedPart(m)}
+                                        className={`block w-40 py-2 rounded-full transition-all ${selectedPart?.id === m.id ? 'rose-gold-bg text-white scale-105' : 'bg-white rose-gold-text border rose-gold-border'}`}
+                                    >
+                                        {m.name}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="test" class="py-24 bg-white/50 border-y border-white">
-            <div class="max-w-3xl mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-light italic brand-font">¿Qué necesita tu cuerpo?</h2>
-                    <p class="text-[10px] text-slate-400 uppercase tracking-widest mt-2">Test rápido de orientación terapéutica</p>
-                </div>
-                
-                <div id="test-box" class="glass rounded-[3rem] p-8 md:p-16 shadow-xl border-white min-h-[450px] flex flex-col justify-center">
-                    <div id="q-1" class="test-step active text-center space-y-8">
-                        <h3 class="text-2xl font-light italic">¿Dónde se concentra tu malestar?</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <button onclick="saveTest('zona', 'superior'); nextQ(2)" class="p-6 border-2 border-slate-100 rounded-3xl hover:border-teal-400 hover:bg-teal-50 transition-all font-bold text-[10px] tracking-widest uppercase">Tren Superior (Cuello/Espalda)</button>
-                            <button onclick="saveTest('zona', 'inferior'); nextQ(2)" class="p-6 border-2 border-slate-100 rounded-3xl hover:border-teal-400 hover:bg-teal-50 transition-all font-bold text-[10px] tracking-widest uppercase">Tren Inferior (Piernas/Pies)</button>
-                        </div>
+                        {selectedPart ? (
+                            <div className="animate-fade-in">
+                                <h3 className="font-bold rose-gold-text text-lg">{selectedPart.name}</h3>
+                                <p className="text-gray-600 text-sm mt-2">{selectedPart.info}</p>
+                            </div>
+                        ) : (
+                            <p className="text-gray-400 italic">Toca un músculo para aprender más</p>
+                        )}
                     </div>
-                    <div id="q-2" class="test-step text-center space-y-8">
-                        <h3 class="text-2xl font-light italic">¿Qué sensación predomina?</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <button onclick="saveTest('tipo', 'dolor'); finalStep()" class="p-6 border-2 border-slate-100 rounded-3xl hover:border-teal-400 hover:bg-teal-50 transition-all font-bold text-[10px] tracking-widest uppercase">Dolor Punzante / Nudos</button>
-                            <button onclick="saveTest('tipo', 'estres'); finalStep()" class="p-6 border-2 border-slate-100 rounded-3xl hover:border-teal-400 hover:bg-teal-50 transition-all font-bold text-[10px] tracking-widest uppercase">Cansancio / Estrés Mental</button>
-                        </div>
-                    </div>
-                    <div id="q-result" class="test-step text-center space-y-6">
-                        <span class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest">Recomendación Ideal</span>
-                        <h3 id="res-name" class="text-4xl font-bold brand-font uppercase italic tracking-tighter">Masaje Especializado</h3>
-                        <p id="res-text" class="text-sm text-slate-500 italic max-w-sm mx-auto leading-relaxed"></p>
-                        <a href="TU_CALENDLY" class="inline-block bg-blue-600 text-white px-10 py-4 rounded-2xl font-bold text-xs shadow-xl mt-4">AGENDAR CONSULTA</a>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="biblioteca" class="py-24 px-6 max-w-7xl mx-auto">
-            <div class="flex justify-between items-end mb-12">
-                <div>
-                    <h2 class="text-3xl font-light italic brand-font border-l-4 border-teal-500 pl-6 uppercase tracking-tighter">Biblioteca Terapéutica</h2>
-                    <p class="text-[10px] text-slate-400 uppercase tracking-widest mt-2 ml-10">Aprende a escuchar las señales de tu cuerpo</p>
+                    <footer className="mt-auto pt-8 text-xs text-gray-400">
+                        &copy; 2026 El Arte de Tocar | Estética Mármol & Oro Rosa
+                    </footer>
                 </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-white">
-                    <div class="h-56 bg-slate-200">
-                        <img src="https://via.placeholder.com/400x300?text=Imagen+Fascia" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-8">
-                        <span class="text-[9px] font-bold text-teal-600 uppercase tracking-widest">Sistema Fascial</span>
-                        <h3 class="text-xl font-bold italic uppercase tracking-tighter mt-2">La Red de la Fascia</h3>
-                        <p class="text-xs text-slate-500 mt-4 leading-relaxed">Descubre por qué un dolor en el pie puede originar tensión en tu cuello a través de las cadenas miofasciales.</p>
-                        <button onclick="openAtlas('lumbar')" class="mt-6 text-teal-700 font-bold text-[10px] uppercase tracking-widest hover:underline">Ver ficha técnica →</button>
-                    </div>
-                </div>
-                </div>
-        </section>
-    </main>
-
-    <div id="modal-atlas" class="fixed inset-0 z-[200] hidden flex items-center justify-center bg-slate-900/60 backdrop-blur-lg p-4">
-        <div class="glass bg-white rounded-[3.5rem] max-w-3xl w-full overflow-hidden shadow-2xl animate-in zoom-in duration-300">
-            <div class="bg-teal-800 p-8 text-white flex justify-between items-start">
-                <div>
-                    <h4 id="atlas-title" class="text-3xl font-bold uppercase italic tracking-tighter brand-font leading-none">Región Lumbar</h4>
-                    <p class="text-[10px] tracking-[0.4em] uppercase opacity-60 mt-3">Diagnóstico Educativo</p>
-                </div>
-                <button onclick="closeAtlas()" class="text-3xl font-light hover:rotate-90 transition-transform duration-300">&times;</button>
-            </div>
-            
-            <div class="p-8 md:p-12 overflow-y-auto max-h-[70vh] no-scrollbar space-y-10">
-                <div>
-                    <h5 class="text-xs font-bold text-teal-700 uppercase tracking-widest mb-3 italic">¿Por qué siente este malestar?</h5>
-                    <p id="atlas-why" class="text-sm text-slate-600 leading-relaxed italic border-l-2 border-teal-100 pl-6"></p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-slate-50 p-6 rounded-[2rem] border border-slate-100">
-                        <h5 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Músculos Involucrados</h5>
-                        <ul id="atlas-muscles" class="text-xs space-y-3 font-medium text-slate-700"></ul>
-                    </div>
-                    <div class="bg-slate-50 p-6 rounded-[2rem] border border-slate-100">
-                        <h5 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Sistemas en Conflicto</h5>
-                        <ul id="atlas-systems" class="text-xs space-y-3 font-medium text-slate-700"></ul>
-                    </div>
-                </div>
-
-                <div class="pt-4">
-                    <a href="TU_CALENDLY" class="block w-full py-5 bg-blue-600 text-white text-center rounded-[1.5rem] font-bold text-xs shadow-xl uppercase tracking-widest hover:bg-blue-700 transition">Agendar Terapia para esta Zona</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <a href="https://wa.me/TU_NUMERO" target="_blank" class="fixed bottom-8 right-8 z-[150] w-16 h-16 bg-[#25D366] rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition duration-300">
-        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
-    </a>
-
-    <script>
-        // BASE DE DATOS MÉDICA-HOLÍSTICA
-        const atlasData = {
-            'cervical': {
-                title: "Región Cervical y Cuello",
-                why: "La tensión en esta zona suele ser el resultado de una 'Cefalea Tensional' o una sobrecarga en la cadena estática posterior, vinculada al estrés y posturas prolongadas.",
-                muscles: ["Trapecio Superior (Directo)", "Elevador de la Escápula (Directo)", "Esternocleidomastoideo (Indirecto)", "Escalenos (Auxiliar)"],
-                systems: ["Nervioso: Nervio Occipital", "Circulatorio: Arteria Vertebral", "Cadena: Cadena de Cierre"]
-            },
-            'lumbar': {
-                title: "Región Lumbar y Sacra",
-                why: "El dolor lumbar suele derivar de una inhibición del psoas o una contractura compensatoria de los multífidos debido a una cadena anterior excesivamente tensa.",
-                muscles: ["Cuadrado Lumbar (Directo)", "Psoas Ilíaco (Vínculo Directo)", "Glúteo Medio (Vínculo Indirecto)", "Erectores de Columna"],
-                systems: ["Nervioso: Nervio Ciático", "Linfático: Cisterna del Quilo", "Cadena: Cadena de Extensión"]
-            }
+            );
         };
 
-        // LÓGICA DE SISTEMAS
-        function switchSystem(sys) {
-            const btns = document.querySelectorAll('.system-btn');
-            btns.forEach(b => b.classList.remove('active', 'bg-teal-800', 'text-white'));
-            btns.forEach(b => b.classList.add('text-slate-400', 'hover:bg-slate-800'));
-            
-            const activeBtn = event.currentTarget;
-            activeBtn.classList.add('active', 'bg-teal-800', 'text-white');
-            activeBtn.classList.remove('text-slate-400', 'hover:bg-slate-800');
-
-            // Cambio de Imagen (Sustituir por tus URLs de Cloudinary/GitHub)
-            const img = document.getElementById('anatomy-render');
-            img.style.opacity = '0';
-            setTimeout(() => {
-                img.src = `https://tu-repositorio.vercel.app/assets/mapa/${sys}.png`;
-                img.style.opacity = '1';
-            }, 300);
-        }
-
-        // LÓGICA DE MODAL
-        function openAtlas(zona) {
-            const data = atlasData[zona];
-            document.getElementById('atlas-title').innerText = data.title;
-            document.getElementById('atlas-why').innerText = data.why;
-            
-            const mList = document.getElementById('atlas-muscles');
-            mList.innerHTML = data.muscles.map(m => `<li>• ${m}</li>`).join('');
-            
-            const sList = document.getElementById('atlas-systems');
-            sList.innerHTML = data.systems.map(s => `<li>• ${s}</li>`).join('');
-
-            document.getElementById('modal-atlas').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeAtlas() {
-            document.getElementById('modal-atlas').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        // LÓGICA DE TEST
-        let userTest = {};
-        function nextQ(n) {
-            document.querySelectorAll('.test-step').forEach(s => s.classList.remove('active'));
-            document.getElementById('q-' + n).classList.add('active');
-        }
-        function saveTest(key, val) { userTest[key] = val; }
-        function finalStep() {
-            nextQ('result');
-            const resName = document.getElementById('res-name');
-            const resText = document.getElementById('res-text');
-            
-            if(userTest.tipo === 'dolor') {
-                resName.innerText = "Masaje Descontracturante";
-                resText.innerText = "Enfoque profundo para liberar los nudos y recuperar la movilidad de tus fibras.";
-            } else {
-                resName.innerText = "Terapia Relajante Holística";
-                resText.innerText = "Calma el sistema nervioso y reduce los niveles de cortisol mediante toques rítmicos.";
-            }
-        }
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<AnatomicalApp />);
     </script>
 </body>
-      </html>
+</html>
+
       
